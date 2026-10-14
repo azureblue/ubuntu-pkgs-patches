@@ -1,0 +1,37 @@
+Index: gdk-pixbuf-2.44.5+dfsg/debian/libgdk-pixbuf-2.0-0.install
+===================================================================
+--- gdk-pixbuf-2.44.5+dfsg.orig/debian/libgdk-pixbuf-2.0-0.install
++++ gdk-pixbuf-2.44.5+dfsg/debian/libgdk-pixbuf-2.0-0.install
+@@ -1,5 +1,5 @@
+ #!/usr/bin/dh-exec
+ usr/bin/gdk-pixbuf-query-loaders /usr/lib/${DEB_HOST_MULTIARCH}/gdk-pixbuf-2.0
+-usr/lib/*/gdk-pixbuf-2.0/2.10.0/loaders/*.so	[!amd64 !arm64 !armhf !i386 !loong64 !ppc64el !riscv64 !s390x]
++usr/lib/*/gdk-pixbuf-2.0/2.10.0/loaders/*.so
+ usr/lib/*/libgdk_pixbuf-2.0.so.0
+ usr/lib/*/libgdk_pixbuf-2.0.so.0.*
+Index: gdk-pixbuf-2.44.5+dfsg/debian/libgdk-pixbuf2.0-bin.install
+===================================================================
+--- gdk-pixbuf-2.44.5+dfsg.orig/debian/libgdk-pixbuf2.0-bin.install
++++ gdk-pixbuf-2.44.5+dfsg/debian/libgdk-pixbuf2.0-bin.install
+@@ -1,5 +1,5 @@
+ #!/usr/bin/dh-exec
+ usr/bin/gdk-pixbuf-csource
+ usr/bin/gdk-pixbuf-pixdata
+-usr/bin/gdk-pixbuf-thumbnailer	[!amd64 !arm64 !armhf !i386 !loong64 !ppc64el !riscv64 !s390x]
+-usr/share/thumbnailers		[!amd64 !arm64 !armhf !i386 !loong64 !ppc64el !riscv64 !s390x]
++usr/bin/gdk-pixbuf-thumbnailer
++usr/share/thumbnailers
+Index: gdk-pixbuf-2.44.5+dfsg/debian/rules
+===================================================================
+--- gdk-pixbuf-2.44.5+dfsg.orig/debian/rules
++++ gdk-pixbuf-2.44.5+dfsg/debian/rules
+@@ -20,9 +20,6 @@ else
+ endif
+ 
+ ifneq (,$(filter $(DEB_HOST_ARCH), amd64 arm64 armhf i386 loong64 ppc64el riscv64 s390x))
+-  # glycin doesn't handle xbm & xpm yet #1071271
+-  GLYCIN = -Dglycin=enabled -Dbuiltin_loaders=glycin,xbm,xpm
+-else
+   GLYCIN = -Dglycin=disabled -Dbuiltin_loaders=png,jpeg -Dthumbnailer=enabled \
+ 		-Dgif=enabled -Djpeg=enabled -Dpng=enabled -Dtiff=enabled \
+ 		-Dothers=enabled -Dthumbnailer=enabled
